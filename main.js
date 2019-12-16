@@ -67,6 +67,7 @@ function getFirstIpAddress(cidrStr, callback) {
   // Initialize return arguments for callback
   let firstIpAddress = null;
   let callbackError = null;
+  let mapped = [firstIpAddress,null];
 
   // Instantiate an object from the imported class and assign the instance to variable cidr.
   const cidr = new IPCIDR(cidrStr);
@@ -89,8 +90,9 @@ function getFirstIpAddress(cidrStr, callback) {
 
 
     //1. The function must call helper function getIpv4MappedIpv6Address() to calculate an IPv4-mapped IPv6 address from a passed IPv4 address
-    let mappedAddress = getIpv4MappedIpv6Address(firstIpAddress);
-    if( mappedAddress ) {
+    
+    mapped[2] = getIpv4MappedIpv6Address(firstIpAddress);
+    if(  mapped[0] ) {
       console.log(`  IPv4 ${firstIpAddress} mapped to IPv6 Address: ${mappedAddress}`);
     } else {
       console.error(`  Problem converting IPv4 ${firstIpAddress} into a mapped IPv6 address.`);
@@ -105,7 +107,7 @@ function getFirstIpAddress(cidrStr, callback) {
   // data as the second argument to the callback function.
 
   //2.	The function must return an object with two propertiess: ipv4 and ipv6. The values of its properties will be strings
-  return callback(mappedAddress, callbackError);
+  return callback(mapped, callbackError);
 }
 
 
