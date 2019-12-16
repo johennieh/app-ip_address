@@ -60,7 +60,7 @@ function getIpv4MappedIpv6Address(ipv4) {
  * @param {string} cidrStr - The IPv4 subnet expressed
  *                 in CIDR format.
  * @param {callback} callback - A callback function.
- * @return {string} {string}(mappedAddress) - An ipv4 and ipv6 address.
+ * @return {string} (firstIpAddress) - An IPv4 address.
  */
 function getFirstIpAddress(cidrStr, callback) {
 
@@ -86,26 +86,12 @@ function getFirstIpAddress(cidrStr, callback) {
     // If the passed CIDR is valid, call the object's toArray() method.
     // Notice the destructering assignment syntax to get the value of the first array's element.
     [firstIpAddress] = cidr.toArray(options);
-
-
-    //1. The function must call helper function getIpv4MappedIpv6Address() to calculate an IPv4-mapped IPv6 address from a passed IPv4 address
-    let mappedAddress = getIpv4MappedIpv6Address(firstIpAddress);
-    if( mappedAddress ) {
-      console.log(`  IPv4 ${firstIpAddress} mapped to IPv6 Address: ${mappedAddress}`);
-    } else {
-      console.error(`  Problem converting IPv4 ${firstIpAddress} into a mapped IPv6 address.`);
-    }
-
-
-
   }
   // Call the passed callback function.
   // Node.js convention is to pass error data as the first argument to a callback.
   // The IAP convention is to pass returned data as the first argument and error
   // data as the second argument to the callback function.
-
-  //2.	The function must return an object with two propertiess: ipv4 and ipv6. The values of its properties will be strings
-  return callback(mappedAddress, callbackError);
+  return callback(firstIpAddress, callbackError);
 }
 
 
