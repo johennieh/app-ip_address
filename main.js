@@ -86,10 +86,10 @@ function getFirstIpAddress(cidrStr, callback) {
   } else {
     // If the passed CIDR is valid, call the object's toArray() method.
     // Notice the destructering assignment syntax to get the value of the first array's element.
-    [firstIpAddress] = cidr.toArray(options);
+    [firstIpAddress] = cidr.toArray(options);  
 
 
-    //1. The function must call helper function getIpv4MappedIpv6Address() to calculate an IPv4-mapped IPv6 address from a passed IPv4 address
+    //1. The function must call helper function get Ipv4MappedIpv6Address() to calculate an IPv4-mapped IPv6 address from a passed IPv4 address
     
     mapped[2] = getIpv4MappedIpv6Address(firstIpAddress);
     if(  mapped[0] ) {
